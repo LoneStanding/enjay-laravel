@@ -1,0 +1,143 @@
+@extends('layout.app')
+
+@section('content')
+    <section class="hero mt-20">
+       {{-- ======================= HERO SECTION (Carousel) ======================= --}}
+        <section class="bg-[linear-gradient(to_top_right,#fef7e4,#ffffff,#f6a75a)] text-white py-8">
+            <div class="container mx-auto px-4">
+
+                {{-- Swiper Carousel --}}
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+
+                        @forelse($banners as $banner)
+                            <div class="swiper-slide flex justify-center items-center">
+                                @php
+                                    $ext = strtolower(pathinfo($banner->media_path, PATHINFO_EXTENSION));
+                                @endphp
+
+                                @if(in_array($ext, ['mp4', 'webm', 'ogg']))
+                                    <video src="{{ asset('storage/' . $banner->media_path) }}" autoplay loop class="w-full h-96 object-cover rounded-lg"></video>
+                                @else
+                                    <img src="{{ asset('storage/' . $banner->media_path) }}" alt="Banner" class="w-full h-96 object-cover rounded-lg">
+                                @endif
+                            </div>
+                        @empty
+                            {{-- Fallback slides --}}
+                            @for($i = 0; $i < 3; $i++)
+                                <div class="swiper-slide flex justify-center items-center bg-gray-800 h-96 py-40 px-20 rounded-xl">
+                                    <span class="text-gray-300 text-2xl">Media Here</span>
+                                </div>
+                            @endfor
+                        @endforelse
+
+                    </div>
+
+                    {{-- Swiper navigation --}}
+                    <div class="swiper-button-next !text-black"></div>
+                    <div class="swiper-button-prev !text-black"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+        </section>
+        {{-- ======================= END HERO SECTION ======================= --}}
+        @push('styles')
+            <style>
+                /* Make pagination dots black */
+                .swiper-pagination-bullet {
+                    background: black !important;
+                    opacity: 0.6;
+                }
+
+                /* Active dot */
+                .swiper-pagination-bullet-active {
+                    background: black !important;
+                    opacity: 1;
+                }
+            </style>
+        @endpush
+
+    </section>
+
+    {{-- resources/views/components/intro.blade.php --}}
+    <section id="intro" class="w-full flex justify-center gap-80 mt-20 mb-64">
+        <div class="flex flex-col justify-items-start pl-40">
+            <h1 class="text-enjay-head text-3xl font-light mb-5 mt-20 font-lexend">Introducing</h1>
+
+            <div class="text-enjay-primary text-4xl mb-3">
+                <h2>THE NEXT ERA OF <br> INNOVATION AND <br> EXCELLENCE</h2>
+            </div>
+
+            <div class="font-light text-enjay-primary">
+                <p class="text-lg leading-8">
+                    We lead the way with our team and strategic <br>
+                    alliances to achieve operational excellence, <br>
+                    innovation, and positive economic impact.
+                </p>
+            </div>
+
+            <div>
+                <a href="{{ url('/about-us') }}" 
+                class="bg-btn-primary rounded-lg px-5 py-2.5 mt-10 text-xl font-light inline-block">
+                    About Us
+                </a>
+            </div>
+        </div>
+
+        <div class="relative w-fit mr-20">
+            <div class="w-60 h-96 py-64 px-52 bg-black mr-20 rounded-2xl">
+            </div>
+
+            {{-- Overlapping Image Card --}}
+            <div class="absolute -bottom-48 -left-24 w-60 h-80 rounded-lg overflow-hidden shadow-lg">
+                <img src="{{ asset('images/home2.png') }}" 
+                    alt="Overlapping" 
+                    class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
+
+
+    @include('partials.product_carousel', ['carouselProducts' => $carouselProducts])
+
+    <section id="service" class="mt-20 flex justify-between">
+        <!-- Left Intro -->
+        <div class="flex flex-col justify-center gap-2.5 pl-20">
+            <h1 class="text-enjay-primary text-4xl mb-5">
+                Our Services
+                <span class="block w-80 border-b-2 border-orange-300 mt-2.5"></span>
+            </h1>
+            <p class="text-lg">
+                We are proud of our customer<br>
+                centric approach and the best<br>
+                in class services to provide<br>
+                innovative solutions to our<br>
+                customers.
+            </p>
+            <a href="{{ route('services.index') }}" 
+            class="bg-btn-primary rounded-lg px-5 py-2.5 mt-10 w-fit text-xl font-light">
+                See All Services
+            </a>
+        </div>
+
+        <!-- Right: Service List -->
+        <div class="w-1/2">
+            @include('partials.service_list', ['services' => $homeServices])
+        </div>
+    </section>
+
+    @include('partials.policy_cards', ['policies' => $policies])
+
+
+
+
+    <div>
+    <h1 class="mt-32">Welcome to Home</h1>
+    @foreach ($sections as $section)
+    <div class="h-20 flex flex-col items-center justify-center">
+    <h2>{{ $section->subsection_title }}</h2>
+    <div >{!! $section->content !!}</div>
+    </div>
+    @endforeach
+@endsection
