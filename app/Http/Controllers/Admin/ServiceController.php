@@ -4,62 +4,73 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Service;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $services = Service::all();
+        return view('admin.service.index', compact('services'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.service.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'service_name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'icon_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        $path = null;
+        if ($request->hasFile('icon_path')) {
+            $path = $request->file('icon_path')->store('services', 'public');
+        }
+
+        Service::create([
+            'service_name' => $request->service_name,
+            'description' => $request->description,
+            'icon_path' => $path,
+        ]);
+
+        return redirect()->route('services.index')->with('success', 'Service added successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Service $service)
     {
-        //
+        return view('admin.service.edit', compact('service'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, Service $service)
     {
-        //
+        $request->validate([
+            'service_name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'icon_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        $path = $service->icon_path;
+        if ($request->hasFile('icon_path')) {
+            $path = $request->file('icon_path')->store('services', 'public');
+        }
+
+        $service->update([
+            'service_name' => $request->service_name,
+            'description' => $request->description,
+            'icon_path' => $path,
+        ]);
+
+        return redirect()->route('services.index')->with('success', 'Service updated successfully');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Service $service)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $service->delete();
+        return redirect()->route('services.index')->with('success', 'Service deleted successfully');
     }
 }

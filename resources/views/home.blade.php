@@ -25,7 +25,7 @@
                         @empty
                             {{-- Fallback slides --}}
                             @for($i = 0; $i < 3; $i++)
-                                <div class="swiper-slide flex justify-center items-center bg-gray-800 h-96 py-40 px-20 rounded-xl">
+                                <div class="swiper-slide flex justify-center items-center bg-gray-800 h-96 py-64 px-20 rounded-xl">
                                     <span class="text-gray-300 text-2xl">Media Here</span>
                                 </div>
                             @endfor
@@ -59,8 +59,7 @@
         @endpush
 
     </section>
-
-    {{-- resources/views/components/intro.blade.php --}}
+    {{-- ======================= INTRO SECTION ======================= --}}
     <section id="intro" class="w-full flex justify-center gap-80 mt-20 mb-64">
         <div class="flex flex-col justify-items-start pl-40">
             <h1 class="text-enjay-head text-3xl font-light mb-5 mt-20 font-lexend">Introducing</h1>
@@ -115,7 +114,7 @@
                 innovative solutions to our<br>
                 customers.
             </p>
-            <a href="{{ route('services.index') }}" 
+            <a href="/services" 
             class="bg-btn-primary rounded-lg px-5 py-2.5 mt-10 w-fit text-xl font-light">
                 See All Services
             </a>
@@ -129,15 +128,10 @@
 
     @include('partials.policy_cards', ['policies' => $policies])
 
+    @include('partials.quality_management', ['certificates' => $certificates])
 
+    @include('partials.news_blog', ['newsBlogs' => $newsBlogs])
 
+    @include('partials.review_carousel', ['reviews' => $reviews])
 
-    <div>
-    <h1 class="mt-32">Welcome to Home</h1>
-    @foreach ($sections as $section)
-    <div class="h-20 flex flex-col items-center justify-center">
-    <h2>{{ $section->subsection_title }}</h2>
-    <div >{!! $section->content !!}</div>
-    </div>
-    @endforeach
 @endsection

@@ -7,6 +7,9 @@ use App\Models\HomePageSections;
 use App\Models\Policies;
 use App\Models\Product;
 use App\Models\Service;
+use App\Models\Certificate;
+use App\Models\NewsBlog;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class HomePageController extends Controller
@@ -57,22 +60,99 @@ class HomePageController extends Controller
                 (object)[
                     'name' => 'Dummy Policy 1',
                     'content' => '<p>This is placeholder content for HSE Commitment section.</p>',
-                    'img_path' => '/images/dummy-policy1.jpg'
+                    'img_path' => ''
                 ],
                 (object)[
                     'name' => 'Dummy Policy 2',
                     'content' => '<p>This is another placeholder policy for demonstration purposes.</p>',
-                    'img_path' => '/images/dummy-policy2.jpg'
+                    'img_path' => '/images/policy-placeholder.png'
                 ],
                 (object)[
                     'name' => 'Dummy Policy 3',
                     'content' => '<p>This is a third placeholder policy to fill space when no policies exist.</p>',
-                    'img_path' => '/images/dummy-policy3.jpg'
+                    'img_path' => ''
+                ],
+            ]);
+        }
+
+        $certificates = Certificate::all();
+        if ($certificates->isEmpty()) {
+            $certificates = collect([
+                (object)[
+                    'id' => 1,
+                    'image_path' => 'storage/images/services.jpg',
+                    'pdf_path' => '#'
+                ],
+                (object)[
+                    'id' => 2,
+                    'image_path' => 'storage/images/cert_placeholder.png',
+                    'pdf_path' => '#'
+                ],
+                (object)[
+                    'id' => 3,
+                    'image_path' => 'storage/images/cert_placeholder.png',
+                    'pdf_path' => '#'
+                ],
+            ]);
+        }
+
+        $newsBlogs = NewsBlog::latest()->take(6)->get();
+
+        if ($newsBlogs->isEmpty()) {
+            $newsBlogs = collect([
+                (object)[
+                    'news_title' => 'Dummy News Title 1',
+                    'tag' => 'General',
+                    'image_path' => 'images/dummy-news1.jpg',
+                    'content' => '<p>This is a placeholder news blog content for display.</p>'
+                ],
+                (object)[
+                    'news_title' => 'Dummy News Title 2',
+                    'tag' => 'Updates',
+                    'image_path' => 'images/dummy-news2.jpg',
+                    'content' => '<p>This is another placeholder news blog content.</p>'
+                ],
+                (object)[
+                    'news_title' => 'Dummy News Title 3',
+                    'tag' => 'Events',
+                    'image_path' => 'images/dummy-news3.jpg',
+                    'content' => '<p>More placeholder content goes here for blogs.</p>'
+                ],
+                (object)[
+                    'news_title' => 'Dummy News Title 4',
+                    'tag' => 'Events',
+                    'image_path' => 'images/dummy-news3.jpg',
+                    'content' => '<p>More placeholder content goes here for blogs.</p>'
+                ],
+            ]);
+        }
+
+        $reviews = Review::all();
+
+        if ($reviews->isEmpty()) {
+            $reviews = collect([
+                (object)[
+                    'profile_path' => 'https://via.placeholder.com/400x300.png?text=John+Doe',
+                    'name' => 'John Doe',
+                    'position' => 'CEO, Example Corp',
+                    'review' => 'This service was excellent and exceeded expectations!',
+                ],
+                (object)[
+                    'profile_path' => 'https://via.placeholder.com/400x300.png?text=Maria+Alba',
+                    'name' => 'Maria Alba',
+                    'position' => 'Manager, TechSoft',
+                    'review' => 'A truly professional and reliable team to work with.',
+                ],
+                (object)[
+                    'profile_path' => 'https://via.placeholder.com/400x300.png?text=Ankit+Patel',
+                    'name' => 'Ankit Patel',
+                    'position' => 'CTO, InnovateX',
+                    'review' => 'Their attention to detail and commitment is outstanding!',
                 ],
             ]);
         }
 
 
-        return view('home', compact('sections', 'banners', 'carouselProducts', 'homeServices', 'policies'));
+        return view('home', compact('sections', 'banners', 'carouselProducts', 'homeServices', 'policies', 'certificates', 'newsBlogs', 'reviews'));
     }
 }

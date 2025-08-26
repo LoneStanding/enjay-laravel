@@ -19,10 +19,16 @@
         <div class="grid gap-6 p-4 cursor-pointer grid-cols-5">
             @if($categories->count() > 0)
                 @foreach($categories as $cat)
+                    @php
+                        // Fetch first product of this category
+                        $firstProduct = \App\Models\Product::where('category', $cat->category)->first();
+                    @endphp
                     <a href="{{ url('/products/'.$cat->category) }}" class="w-52 flex-shrink-0 group">
                         <div class="relative overflow-hidden rounded-2xl">
                             <img 
-                                src="{{ $cat->image_path ?? asset('placeholder/product.png') }}" 
+                                src="{{ $firstProduct && $firstProduct->image_path 
+                                        ? asset('storage/'.$firstProduct->image_path) 
+                                        : asset('storage/images/product_placeholder.png') }}" 
                                 alt="{{ $cat->category }}" 
                                 class="w-full h-52 object-cover" 
                                 draggable="false"
@@ -40,7 +46,7 @@
                     <div class="w-52 flex-shrink-0 group">
                         <div class="relative overflow-hidden rounded-2xl">
                             <img 
-                                src="{{ asset('placeholder/product.png') }}" 
+                                src="{{ asset('storage/images/product_placeholder.png') }}" 
                                 alt="Dummy Product {{ $i }}" 
                                 class="w-full h-52 object-cover" 
                                 draggable="false"

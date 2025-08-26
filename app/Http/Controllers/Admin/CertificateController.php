@@ -4,62 +4,86 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Certificate;
+use Illuminate\Support\Facades\Storage;
 
 class CertificateController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $certificates = Certificate::all();
+        return view('admin.certificate.index', compact('certificates'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.certificate.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'pdf_path' => 'required|file|mimes:pdf',
+            'img_path' => 'required|image',
+        ]);
+
+        $pdfPath = $request->file('pdf_path')->store('certificates/pdfs', 'public');
+        $imgPath = $request->file('img_path')->store('certificates/images', 'public');
+
+        Certificate::create([
+            'pdf_path' => $pdfPath,
+            'img_path' => $imgPath,
+        ]);
+
+        return redirect()->route('certificates.index')->with('success', 'Certificate added successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Certificate $certificate)
     {
-        //
+        return view('admin.certificate.edit', compact('certificate'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, Certificate $certificate)
     {
-        //
+        $request->validate([
+            'pdf_path' => 'nullable|file|mimes:pdf',
+            'img_path' => 'nullable|image',
+        ]);
+
+        if ($request->hasFile('pdf_path')) {
+            // delete old pdf if exists
+            if ($certificate->pdf_path && Storage::disk('public')->exists($certificate->pdf_path)) {
+                Storage::disk('public')->delete($certificate->pdf_path);
+            }
+            $certificate->pdf_path = $request->file('pdf_path')->store('certificates/pdfs', 'public');
+        }
+
+        if ($request->hasFile('img_path')) {
+            // delete old image if exists
+            if ($certificate->img_path && Storage::disk('public')->exists($certificate->img_path)) {
+                Storage::disk('public')->delete($certificate->img_path);
+            }
+            $certificate->img_path = $request->file('img_path')->store('certificates/images', 'public');
+        }
+
+        $certificate->save();
+
+        return redirect()->route('certificates.index')->with('success', 'Certificate updated successfully!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Certificate $certificate)
     {
-        //
-    }
+        // delete files if they exist
+        if ($certificate->pdf_path && Storage::disk('public')->exists($certificate->pdf_path)) {
+            Storage::disk('public')->delete($certificate->pdf_path);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        if ($certificate->img_path && Storage::disk('public')->exists($certificate->img_path)) {
+            Storage::disk('public')->delete($certificate->img_path);
+        }
+
+        $certificate->delete();
+
+        return redirect()->route('certificates.index')->with('success', 'Certificate deleted successfully!');
     }
 }

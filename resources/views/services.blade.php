@@ -50,7 +50,7 @@
             {{-- Icon --}}
             <div class="mb-5">
               <img
-                src="{{ $service->icon_path ? asset($service->icon_path) : asset('images/service-icons/default.svg') }}"
+                src="{{$service->icon_path ? asset('storage/' . $service->icon_path) : asset('images/service-icons/default.svg') }}"
                 alt="{{ $service->service_name }} icon"
                 class="w-10 h-10 object-contain"
                 onerror="this.src='{{ asset(`images/service-icons/default.svg`) }}'"

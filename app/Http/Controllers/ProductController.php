@@ -16,4 +16,16 @@ class ProductController extends Controller
 
         return view('product', compact('categories'));
     }
+    public function showCategory($category)
+    {
+        // Get all products in this category
+        $products = Product::where('product_category', $category)->get();
+
+        if ($products->isEmpty()) {
+            abort(404, "No products found in this category.");
+        }
+
+        return view('productsdetails', compact('products', 'category'));
+    }
+
 }

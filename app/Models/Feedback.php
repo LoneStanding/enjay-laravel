@@ -10,7 +10,8 @@ class Feedback extends Model
     protected $fillable = [
         'name',
         'email',
-        'rating',
-        'comments'
+        'phone',
+        'company',
+        'feedback'
     ];
 }

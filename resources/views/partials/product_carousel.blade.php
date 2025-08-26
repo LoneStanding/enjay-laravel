@@ -58,7 +58,7 @@
 
     <!-- See All Products Button -->
     <div class="flex justify-center">
-        <a href="{{ route('products.index') }}"
+        <a href="/products"
            class="bg-btn-primary rounded-lg px-5 py-2.5 -translate-y-5 text-xl font-light">
             See All Products
         </a>

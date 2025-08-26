@@ -16,13 +16,13 @@
         @foreach($policies as $index => $policy)
             <article class="flex justify-between {{ $index % 2 == 0 ? '' : 'flex-row-reverse' }}">
                 <div class="flex flex-col justify-center {{ $index % 2 == 0 ? 'pl-20' : 'pr-20 text-end' }}">
-                    <h1 class="text-enjay-head text-5xl font-light mb-5">{{ $policy->name }}</h1>
+                    <h1 class="text-enjay-head text-3xl font-regular mb-5">{{ $policy->name }}</h1>
                     <div class="text-md font-light">
                         {!! nl2br(e($policy->content)) !!}
                     </div>
                 </div>
                 @if($policy->img_path)
-                    <img src="{{ asset($policy->img_path) }}" class="w-1/3 rounded-2xl" alt="{{ $policy->name }}">
+                    <img src="{{ asset($policy->img_path) }}" class="w-1/3 rounded-2xl" alt="{{ $policy->name }} image">
                 @endif
             </article>
         @endforeach
