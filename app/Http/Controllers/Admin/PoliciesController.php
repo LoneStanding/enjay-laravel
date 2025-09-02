@@ -4,62 +4,78 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Policies as Policy;
+use Illuminate\Support\Facades\Storage;
 
 class PoliciesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $policies = Policy::latest()->get();
+        return view('admin.policy.index', compact('policies'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.policy.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'    => 'required|string|max:255',
+            'content' => 'required|string',
+            'img_path'=> 'nullable|image|max:2048',
+        ]);
+
+        $path = $request->file('img_path')?->store('policies', 'public');
+
+        Policy::create([
+            'name'     => $request->name,
+            'content'  => $request->content,
+            'img_path' => $path,
+        ]);
+
+        return redirect()->route('policies.index')->with('success', 'Policy created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Policy $policy)
     {
-        //
+        return view('admin.policy.edit', compact('policy'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, Policy $policy)
     {
-        //
+        $request->validate([
+            'name'    => 'required|string|max:255',
+            'content' => 'required|string',
+            'img_path'=> 'nullable|image|max:2048',
+        ]);
+
+        $path = $policy->img_path;
+        if ($request->hasFile('img_path')) {
+            if ($policy->img_path && Storage::disk('public')->exists($policy->img_path)) {
+                Storage::disk('public')->delete($policy->img_path);
+            }
+            $path = $request->file('img_path')->store('policies', 'public');
+        }
+
+        $policy->update([
+            'name'     => $request->name,
+            'content'  => $request->content,
+            'img_path' => $path,
+        ]);
+
+        return redirect()->route('policies.index')->with('success', 'Policy updated successfully.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Policy $policy)
     {
-        //
-    }
+        if ($policy->img_path && Storage::disk('public')->exists($policy->img_path)) {
+            Storage::disk('public')->delete($policy->img_path);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $policy->delete();
+        return redirect()->route('policies.index')->with('success', 'Policy deleted successfully.');
     }
 }

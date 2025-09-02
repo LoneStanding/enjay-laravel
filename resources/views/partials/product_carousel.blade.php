@@ -28,6 +28,7 @@
             class="flex gap-4 overflow-x-auto pl-28 py-4 scrollbar-hide scroll-smooth cursor-pointer translate-y-1/5"
         >
             @foreach($carouselProducts as $product)
+            <a href="{{ url('/products/'.$product->category.'?product='.$product->id) }}">
                 <div class="w-80 flex-shrink-0 group">
                     <div class="relative overflow-hidden rounded-2xl">
                         <!-- Product Image -->
@@ -52,6 +53,7 @@
                         </p>
                     </div>
                 </div>
+            </a>
             @endforeach
         </div>
     </div>

@@ -1,56 +1,33 @@
 @extends('admin.layout.admin')
 
-@section('title', 'Add Career')
+@section('title', 'Add Policy')
 
 @section('content')
-    <h1>Add Career</h1>
+    <h1>Add Policy</h1>
 
-    <form action="{{ route('career.store') }}" method="POST">
+    <form action="{{ route('policies.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
-            <label>Job Title</label>
-            <input type="text" name="job_title" class="form-control" value="{{ old('job_title') }}" required>
+            <label for="name" class="form-label">Policy Name</label>
+            <input type="text" name="name" id="name" class="form-control" required value="{{ old('name') }}">
         </div>
 
         <div class="mb-3">
-            <label>Qualification</label>
-            <input type="text" name="qualification" class="form-control" value="{{ old('qualification') }}">
+            <label for="content" class="form-label">Content</label>
+            <textarea name="content" id="content" class="form-control" rows="6" required>{{ old('content') }}</textarea>
         </div>
 
         <div class="mb-3">
-            <label>Experience</label>
-            <input type="text" name="experience" class="form-control" value="{{ old('experience') }}">
+            <label for="img_path" class="form-label">Image (optional)</label>
+            <input type="file" name="img_path" id="img_path" class="form-control">
         </div>
 
-        <div class="mb-3">
-            <label>Nationality</label>
-            <input type="text" name="nationality" class="form-control" value="{{ old('nationality') }}">
-        </div>
-
-        <div class="mb-3">
-            <label>Job Status</label>
-            <select name="job_status" class="form-control" required>
-                <option value="active" {{ old('job_status') == 'active' ? 'selected' : '' }}>Active</option>
-                <option value="inactive" {{ old('job_status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label>Job Location</label>
-            <input type="text" name="location" class="form-control" value="{{ old('location') }}">
-        </div>
-
-        <div class="mb-3">
-            <label>Category</label>
-            <input type="text" name="category" class="form-control" value="{{ old('category') }}">
-        </div>
-
-        <div class="mb-3">
-            <label>Job Description</label>
-            <textarea name="job_description" class="form-control" rows="5">{{ old('job_description') }}</textarea>
-        </div>
-
-        <button class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-success">Save Policy</button>
+        <a href="{{ route('policies.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+@endpush

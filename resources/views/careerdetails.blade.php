@@ -1,22 +1,27 @@
 @extends('layout.app')
 
 @section('content')
-<div class="w-full flex flex-col items-center justify-center mt-32">
-    <h1 class="text-5xl text-center mb-10">Careers</h1>
-    <p class="text-center text-lg mb-20">Join our team and be a part of our innovative journey.</p>
+<div class="mt-32"></div>
+<div class="mx-64 bg-white rounded-2xl shadow-lg p-10">
+    <h1 class="text-4xl font-bold mb-5">{{ $career->job_title }}</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
+        <p><strong>Category:</strong> {{ $career->category }}</p>
+        <p><strong>Qualification:</strong> {{ $career->qualification }}</p>
+        <p><strong>Experience:</strong> {{ $career->experience }}</p>
+        <p><strong>Nationality:</strong> {{ $career->nationality }}</p>
+        <p><strong>Status:</strong> {{ $career->job_status }}</p>
+        <p><strong>Location:</strong> {{ $career->location }}</p>
+    </div>
 
-    <div class="tabs mb-10 bg-white rounded-lg py-2.5 px-5 shadow-md w-[80%]">
-        <div class="w-full">
-            <h2 class="text-3xl font-bold my-4 text-center">{{ $career->job_title }}</h2>
-            <p class="text-lg">Qualification: <span class="text">{{ $career->qualification }}</span></p>
-            <p class="text-lg">Experience: <span class="text">{{ $career->experience }}</span></p>
-            <p class="text-lg">Nationality: <span class="text">{{ $career->nationality }}</span></p>
-            <p class="text-lg">Job Status: <span class="text">{{ $career->job_status }}</span></p>
-            <p class="text-lg">Location: <span class="text">{{ $career->job_location }}</span></p>
-            <a href="/about-us" class="bg-btn-primary rounded-2xl px-5 py-2.5 my-10 font-light w-fit inline-block">
-                Apply Now
-            </a>
-        </div>
+    <div class="prose max-w-none mb-10">
+        {!! $career->job_description !!}
+    </div>
+
+    <div class="flex justify-center">
+        <a href="{{ route('apply.form', $career->id) }}" 
+           class="bg-green-600 text-white px-6 py-3 rounded-xl shadow hover:bg-green-700 transition duration-300">
+            Apply Now
+        </a>
     </div>
 </div>
 @endsection

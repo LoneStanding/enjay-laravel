@@ -17,7 +17,7 @@
     <div class="relative z-20 px-8 pt-[100px] pb-16">
         <div class="flex justify-between items-center mb-8">
             <h2 class="text-4xl font-regular ml-12 -translate-y-2.5 text-black">Media</h2>
-            <a href="{{ route('products.index') }}" 
+            <a href="{{ route('media.index') }}" 
                class="bg-orange-300 text-black py-2 px-5 rounded-full">
                 View All Media
             </a>
@@ -34,9 +34,9 @@
 
                     <h3 class="mt-2 text-lg font-semibold">{{ $blog->news_title }}</h3>
                     <p class="text-sm">
-                        {{ Str::words(strip_tags($blog->content), 20, '...') }}
+                        {{ Str::words(strip_tags($blog->content), 5, '...') }}
                     </p>
-                    <a href="{{ route('products.index', $blog->news_title) }}" 
+                    <a href="{{ route('media.show', $blog->id) }}" 
                        class="mt-2 block text-purple-700 text-sm font-medium">
                         Read Article
                     </a>

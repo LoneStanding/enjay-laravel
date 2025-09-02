@@ -33,7 +33,7 @@
                 <td>{{ $customer->location }}</td>
                 <td>{{ $customer->requirements }}</td>
                 <td>
-                    <a href="{{ route('customer.destroy', $customer->id) }}"
+                    <a href="{{ route('customer_list.destroy', $customer->id) }}"
                        onclick="return confirm('Delete this customer?')"
                        class="btn btn-sm btn-danger">
                         Delete

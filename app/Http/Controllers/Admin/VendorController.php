@@ -17,6 +17,6 @@ class VendorController extends Controller
     public function destroy(Vendor $vendor)
     {
         $vendor->delete();
-        return redirect()->route('vendors.index')->with('success', 'Customer deleted successfully!');
+        return redirect()->route('vendor_list.index')->with('success', 'Customer deleted successfully!');
     }
 }

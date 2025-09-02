@@ -1,13 +1,13 @@
 @extends('admin.layout.admin')
 
-@section('title', 'Careers')
+@section('title', 'Reviews')
 
 @section('content')
-    <h1>Career</h1>
+    <h1>Reviews</h1>
 
     <div class="mb-3">
-        <a href="{{ route('career.create') }}" class="btn btn-success">
-            <i class="bi bi-plus-lg"></i> Add Career
+        <a href="{{ route('reviews.create') }}" class="btn btn-success">
+            <i class="bi bi-plus-lg"></i> Add Review
         </a>
     </div>
 
@@ -15,43 +15,38 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Title</th>
-                <th>Location</th>
-                <th>Status</th>
+                <th>Profile</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Review</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        @forelse($careers as $career)
+        @forelse($reviews as $review)
             <tr>
-                <td>{{ $career->id }}</td>
+                <td>{{ $review->id }}</td>
                 <td>
-                    @if($career->title)
-                        {{ $career->title }}
+                    @if($review->profile_path)
+                        <img src="{{ asset('storage/'.$review->profile_path) }}" alt="Profile" width="50" height="50">
+                    @else
+                        <img src="{{ asset('images/default-profile.png') }}" alt="Default" width="50" height="50">
                     @endif
                 </td>
+                <td>{{ $review->name }}</td>
+                <td>{{ $review->position }}</td>
+                <td>{{ Str::limit($review->review, 50) }}</td>
                 <td>
-                    @if($career->location)
-                        {{ $career->location }}
-                    @endif
-                </td>
-                <td>
-                    @if($career->status)
-                        {{ $career->location }}
-                    @endif
-                </td>
-                <td>
-                    <a href="{{ route('career.edit', $career->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                    <form action="{{ route('career.destroy', $career->id) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('reviews.edit', $review->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                    <form action="{{ route('reviews.destroy', $review->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this banner?')">Delete</button>
+                        <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this review?')">Delete</button>
                     </form>
                 </td>
             </tr>
         @empty
-            <tr>
-                <td colspan="4">No career found.</td>
-            </tr>
+            <tr><td colspan="6">No reviews found.</td></tr>
         @endforelse
         </tbody>
     </table>

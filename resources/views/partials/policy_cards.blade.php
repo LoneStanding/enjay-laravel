@@ -9,7 +9,7 @@
             @foreach($policies as $i => $policy)
                 <div 
     class="group relative flex flex-col text-white transition-all duration-500 overflow-hidden justify-end policy-card bg-cover bg-center"
-    style="background-image: url("{{ asset($policy->img_path ?? 'storage/images/policy_placeholder.png') }}')
+    style="background-image: url('{{ asset(($policy->img_path ? 'storage/'.$policy->img_path : 'storage/images/policy_placeholder.png')) }}')"
     data-index="{{ $i }}"
 >
 

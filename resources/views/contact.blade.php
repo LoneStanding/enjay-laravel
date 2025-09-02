@@ -49,7 +49,7 @@
 
     <section class="pt-10">
         {{-- Customer Registration --}}
-        <form id="form1" onsubmit="submitForm(event, '{{ route('customer_list.store') }}')" class="hidden max-w-3xl mx-auto p-6 bg-white rounded-lg space-y-6">
+        <form id="form1" action="{{ route('customer_list.public_store') }}" onsubmit="submitForm(event)" class="hidden max-w-3xl mx-auto p-6 bg-white rounded-lg space-y-6">
             <h2 class="text-2xl font-semibold">
                 Customer <span class="block">Registration</span>
                 <span class="block w-16 border-b-2 border-orange-300 mt-1"></span>
@@ -125,7 +125,7 @@
         </form>
 
         {{-- Supplier Registration --}}
-        <form id="form2" onsubmit="submitForm(event, '{{ route('vendor_list.store') }}')" class="hidden max-w-3xl mx-auto p-6 bg-white rounded-lg space-y-6">
+        <form id="form2" action="{{ route('vendor_list.public_store') }}" onsubmit="submitForm(event)" class="hidden max-w-3xl mx-auto p-6 bg-white rounded-lg space-y-6">
             <h2 class="text-2xl font-semibold">
                 Supplier <span class="block">Registration</span>
                 <span class="block w-16 border-b-2 border-orange-300 mt-1"></span>
@@ -182,7 +182,7 @@
         </form>
 
         {{-- Feedback Form --}}
-        <form id="form4" onsubmit="submitForm(event, '{{ route('feedback_list.store') }}')" class="hidden max-w-3xl mx-auto p-6 bg-white rounded-lg space-y-6">
+        <form id="form4" action="{{ route('feedback_list.public_store') }}" onsubmit="submitForm(event)" class="hidden max-w-3xl mx-auto p-6 bg-white rounded-lg space-y-6">
             <h2 class="text-2xl font-semibold">
                 Feedback <span class="block">Form</span>
                 <span class="block w-16 border-b-2 border-orange-300 mt-1"></span>
@@ -227,9 +227,10 @@
         document.getElementById(`btn-${formId}`).classList.add('bg-btn-secondary');
     }
 
-    function submitForm(e, actionUrl) {
+    function submitForm(e) {
         e.preventDefault();
         let form = e.target;
+        let actionUrl = form.getAttribute("action"); // ✅ get route from form
         let formData = new FormData(form);
 
         fetch(actionUrl, {
@@ -246,4 +247,5 @@
         .catch(err => console.error('Error submitting form:', err));
     }
 </script>
+
 @endsection

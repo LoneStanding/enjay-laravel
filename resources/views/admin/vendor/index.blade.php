@@ -33,7 +33,7 @@
                 <td>{{ $vendor->address }}</td>
                 <td>{{ $vendor->service_category }}</td>
                 <td>
-                    <a href="{{ route('vendor.destroy', $vendor->id) }}"
+                    <a href="{{ route('vendor_list.destroy', $vendor->id) }}"
                        onclick="return confirm('Delete this vendor?')"
                        class="btn btn-sm btn-danger">
                         Delete

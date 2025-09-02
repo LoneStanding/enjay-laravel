@@ -1,13 +1,13 @@
 @extends('admin.layout.admin')
 
-@section('title', 'Careers')
+@section('title', 'News Blogs')
 
 @section('content')
-    <h1>Career</h1>
+    <h1>News Blogs</h1>
 
     <div class="mb-3">
-        <a href="{{ route('career.create') }}" class="btn btn-success">
-            <i class="bi bi-plus-lg"></i> Add Career
+        <a href="{{ route('news_blog.create') }}" class="btn btn-success">
+            <i class="bi bi-plus-lg"></i> Add News Blog
         </a>
     </div>
 
@@ -16,42 +16,33 @@
             <tr>
                 <th>ID</th>
                 <th>Title</th>
-                <th>Location</th>
-                <th>Status</th>
+                <th>Tag</th>
+                <th>Image</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        @forelse($careers as $career)
+        @forelse($newsBlogs as $blog)
             <tr>
-                <td>{{ $career->id }}</td>
+                <td>{{ $blog->id }}</td>
+                <td>{{ $blog->news_title }}</td>
+                <td>{{ $blog->tag }}</td>
                 <td>
-                    @if($career->title)
-                        {{ $career->title }}
+                    @if($blog->image_path)
+                        <img src="{{ asset('storage/'.$blog->image_path) }}" alt="Blog Image" width="100">
                     @endif
                 </td>
                 <td>
-                    @if($career->location)
-                        {{ $career->location }}
-                    @endif
-                </td>
-                <td>
-                    @if($career->status)
-                        {{ $career->location }}
-                    @endif
-                </td>
-                <td>
-                    <a href="{{ route('career.edit', $career->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                    <form action="{{ route('career.destroy', $career->id) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('news_blog.edit',$blog) }}" class="btn btn-sm btn-primary">Edit</a>
+                    <form action="{{ route('news_blog.destroy', $blog) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this banner?')">Delete</button>
+                        <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this news blog?')">Delete</button>
                     </form>
                 </td>
             </tr>
         @empty
-            <tr>
-                <td colspan="4">No career found.</td>
-            </tr>
+            <tr><td colspan="5">No news blogs found.</td></tr>
         @endforelse
         </tbody>
     </table>

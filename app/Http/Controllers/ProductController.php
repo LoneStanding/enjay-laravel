@@ -9,23 +9,21 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // Get one product per category
-        $categories = Product::select('category', 'image_path')
-            ->groupBy('category', 'image_path')
-            ->get();
+        // Get one product per category (first product by id)
+        $categories = Product::selectRaw('MIN(id) as id, category')
+            ->groupBy('category')
+            ->get()
+            ->map(function ($item) {
+                return Product::find($item->id); // fetch actual product
+            });
 
-        return view('product', compact('categories'));
+        return view('product', ['categories' => $categories]);
     }
-    public function showCategory($category)
+
+    public function show($category)
     {
-        // Get all products in this category
-        $products = Product::where('product_category', $category)->get();
-
-        if ($products->isEmpty()) {
-            abort(404, "No products found in this category.");
-        }
-
-        return view('productsdetails', compact('products', 'category'));
+        $products = \App\Models\Product::where('category', $category)->get();
+        return view('productdetails', compact('category', 'products'));
     }
 
 }

@@ -31,7 +31,7 @@
                 <td>{{ $feedback->company }}</td>
                 <td>{{ $feedback->feedback }}</td>
                 <td>
-                    <a href="{{ route('feedback.destroy', $feedback->id) }}"
+                    <a href="{{ route('feedback_list.destroy', $feedback->id) }}"
                        onclick="return confirm('Delete this feedback?')"
                        class="btn btn-sm btn-danger">
                         Delete

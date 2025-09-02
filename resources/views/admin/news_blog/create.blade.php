@@ -1,56 +1,28 @@
 @extends('admin.layout.admin')
 
-@section('title', 'Add Career')
+@section('title', 'Add News Blog')
 
 @section('content')
-    <h1>Add Career</h1>
+    <h1>Add News Blog</h1>
 
-    <form action="{{ route('career.store') }}" method="POST">
+    <form action="{{ route('news_blog.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-
         <div class="mb-3">
-            <label>Job Title</label>
-            <input type="text" name="job_title" class="form-control" value="{{ old('job_title') }}" required>
+            <label for="news_title" class="form-label">Title</label>
+            <input type="text" name="news_title" class="form-control" required>
         </div>
-
         <div class="mb-3">
-            <label>Qualification</label>
-            <input type="text" name="qualification" class="form-control" value="{{ old('qualification') }}">
+            <label for="tag" class="form-label">Tag</label>
+            <input type="text" name="tag" class="form-control" required>
         </div>
-
         <div class="mb-3">
-            <label>Experience</label>
-            <input type="text" name="experience" class="form-control" value="{{ old('experience') }}">
+            <label for="image" class="form-label">Upload Image (optional)</label>
+            <input type="file" name="image" class="form-control">
         </div>
-
         <div class="mb-3">
-            <label>Nationality</label>
-            <input type="text" name="nationality" class="form-control" value="{{ old('nationality') }}">
+            <label for="content" class="form-label">Content</label>
+            <textarea name="content" class="form-control" rows="5" required></textarea>
         </div>
-
-        <div class="mb-3">
-            <label>Job Status</label>
-            <select name="job_status" class="form-control" required>
-                <option value="active" {{ old('job_status') == 'active' ? 'selected' : '' }}>Active</option>
-                <option value="inactive" {{ old('job_status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label>Job Location</label>
-            <input type="text" name="location" class="form-control" value="{{ old('location') }}">
-        </div>
-
-        <div class="mb-3">
-            <label>Category</label>
-            <input type="text" name="category" class="form-control" value="{{ old('category') }}">
-        </div>
-
-        <div class="mb-3">
-            <label>Job Description</label>
-            <textarea name="job_description" class="form-control" rows="5">{{ old('job_description') }}</textarea>
-        </div>
-
-        <button class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-success">Save</button>
     </form>
 @endsection

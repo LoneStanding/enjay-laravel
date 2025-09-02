@@ -1,13 +1,13 @@
 @extends('admin.layout.admin')
 
-@section('title', 'Careers')
+@section('title', 'Policies')
 
 @section('content')
-    <h1>Career</h1>
+    <h1>Policies</h1>
 
     <div class="mb-3">
-        <a href="{{ route('career.create') }}" class="btn btn-success">
-            <i class="bi bi-plus-lg"></i> Add Career
+        <a href="{{ route('policies.create') }}" class="btn btn-success">
+            <i class="bi bi-plus-lg"></i> Add Policy
         </a>
     </div>
 
@@ -15,42 +15,35 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Title</th>
-                <th>Location</th>
-                <th>Status</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        @forelse($careers as $career)
+        @forelse($policies as $policy)
             <tr>
-                <td>{{ $career->id }}</td>
+                <td>{{ $policy->id }}</td>
+                <td>{{ $policy->name }}</td>
                 <td>
-                    @if($career->title)
-                        {{ $career->title }}
+                    @if($policy->img_path)
+                        <img src="{{ asset('storage/' . $policy->img_path) }}" alt="Policy Image" width="80">
+                    @else
+                        <span class="text-muted">No Image</span>
                     @endif
                 </td>
                 <td>
-                    @if($career->location)
-                        {{ $career->location }}
-                    @endif
-                </td>
-                <td>
-                    @if($career->status)
-                        {{ $career->location }}
-                    @endif
-                </td>
-                <td>
-                    <a href="{{ route('career.edit', $career->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                    <form action="{{ route('career.destroy', $career->id) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('policies.edit', $policy->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                    <form action="{{ route('policies.destroy', $policy->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this banner?')">Delete</button>
+                        <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this policy?')">Delete</button>
                     </form>
                 </td>
             </tr>
         @empty
             <tr>
-                <td colspan="4">No career found.</td>
+                <td colspan="5">No policies found.</td>
             </tr>
         @endforelse
         </tbody>

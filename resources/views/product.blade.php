@@ -16,21 +16,21 @@
             <a href="{{ route('products.index') }}">PRODUCTS</a>
         </h2>
 
-        <div class="grid gap-6 p-4 cursor-pointer grid-cols-5">
+        <div class="flex flex-wrap gap-6 p-4 px-20 cursor-pointer justify-start w-full">
             @if($categories->count() > 0)
                 @foreach($categories as $cat)
                     @php
                         // Fetch first product of this category
                         $firstProduct = \App\Models\Product::where('category', $cat->category)->first();
                     @endphp
-                    <a href="{{ url('/products/'.$cat->category) }}" class="w-52 flex-shrink-0 group">
+                    <a href="{{ url('/products/'.$cat->category) }}" class=" w-[16rem] flex-shrink-0 group">
                         <div class="relative overflow-hidden rounded-2xl">
                             <img 
                                 src="{{ $firstProduct && $firstProduct->image_path 
                                         ? asset('storage/'.$firstProduct->image_path) 
                                         : asset('storage/images/product_placeholder.png') }}" 
                                 alt="{{ $cat->category }}" 
-                                class="w-full h-52 object-cover" 
+                                class="w-full h-[20rem] object-cover" 
                                 draggable="false"
                             >
                             <div class="absolute inset-0 bg-gradient-to-tr from-black via-transparent to-white opacity-50 pointer-events-none"></div>

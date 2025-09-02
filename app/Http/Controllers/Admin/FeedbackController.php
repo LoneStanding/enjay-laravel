@@ -17,7 +17,7 @@ class FeedbackController extends Controller
     public function destroy(Feedback $feedback)
     {
         $feedback->delete();
-        return redirect()->route('feedbacks.index')->with('success', 'Customer deleted successfully!');
+        return redirect()->route('feedback_list.index')->with('success', 'Customer deleted successfully!');
     }
 
 }

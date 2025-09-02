@@ -21,12 +21,13 @@ class HomePageController extends Controller
         $carouselProducts = Product::take(10)->get();
         if ($carouselProducts->isEmpty()) {
             $carouselProducts = collect([
-                (object) ['product_name' => 'Dummy Product 1', 'image_path' => 'images/product_placeholder.png'],
-                (object) ['product_name' => 'Dummy Product 2', 'image_path' => 'images/product_placeholder.png'],
-                (object) ['product_name' => 'Dummy Product 3', 'image_path' => 'images/product_placeholder.png'],
-                (object) ['product_name' => 'Dummy Product 4', 'image_path' => 'images/product_placeholder.png'],
-                (object) ['product_name' => 'Dummy Product 5', 'image_path' => 'images/product_placeholder.png'],
+                (object) ['id' => 1, 'category' => 'dummy', 'product_name' => 'Dummy Product 1', 'image_path' => 'images/product_placeholder.png'],
+                (object) ['id' => 2, 'category' => 'dummy', 'product_name' => 'Dummy Product 2', 'image_path' => 'images/product_placeholder.png'],
+                (object) ['id' => 3, 'category' => 'dummy', 'product_name' => 'Dummy Product 3', 'image_path' => 'images/product_placeholder.png'],
+                (object) ['id' => 4, 'category' => 'dummy', 'product_name' => 'Dummy Product 4', 'image_path' => 'images/product_placeholder.png'],
+                (object) ['id' => 5, 'category' => 'dummy', 'product_name' => 'Dummy Product 5', 'image_path' => 'images/product_placeholder.png'],
             ]);
+
         }
         $homeServices = Service::select('id','service_name','icon_path','description')
                                 ->take(6)
@@ -101,24 +102,28 @@ class HomePageController extends Controller
         if ($newsBlogs->isEmpty()) {
             $newsBlogs = collect([
                 (object)[
+                    'id' => 1,
                     'news_title' => 'Dummy News Title 1',
                     'tag' => 'General',
                     'image_path' => 'images/dummy-news1.jpg',
                     'content' => '<p>This is a placeholder news blog content for display.</p>'
                 ],
                 (object)[
+                    'id' => 2,
                     'news_title' => 'Dummy News Title 2',
                     'tag' => 'Updates',
                     'image_path' => 'images/dummy-news2.jpg',
                     'content' => '<p>This is another placeholder news blog content.</p>'
                 ],
                 (object)[
+                    'id' => 3,
                     'news_title' => 'Dummy News Title 3',
                     'tag' => 'Events',
                     'image_path' => 'images/dummy-news3.jpg',
                     'content' => '<p>More placeholder content goes here for blogs.</p>'
                 ],
                 (object)[
+                    'id' => 4,
                     'news_title' => 'Dummy News Title 4',
                     'tag' => 'Events',
                     'image_path' => 'images/dummy-news3.jpg',
@@ -126,6 +131,7 @@ class HomePageController extends Controller
                 ],
             ]);
         }
+
 
         $reviews = Review::all();
 
