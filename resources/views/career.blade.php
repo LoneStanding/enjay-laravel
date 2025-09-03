@@ -3,7 +3,7 @@
 @section('content')
 <div>
     <div class="mt-32"></div>
-    <div class="mx-64 flex flex-col items-center">
+    <div class="lg:mx-64 flex flex-col items-center">
         <h1 class="text-5xl text-center mb-10">Careers</h1>
         <p class="text-center text-lg mb-20">Join our team and be a part of our innovative journey.</p>
         
@@ -18,7 +18,7 @@
             @endforeach
         </div>
 
-        <div id="career-list" class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div id="career-list" class="grid grid-cols-1 md:grid-cols-3 gap-10 w-[80%] lg:w-full">
             @include('partials.career_cards', ['careers' => $careers])
         </div>
     </div>

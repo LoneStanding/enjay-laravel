@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="mt-32"></div>
-<div class="mx-64 bg-white rounded-2xl shadow-lg p-10">
+<div class="lg:mx-64 bg-white rounded-2xl shadow-lg p-10">
     <h1 class="text-4xl font-bold mb-5">{{ $career->job_title }}</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
         <p><strong>Category:</strong> {{ $career->category }}</p>

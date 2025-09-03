@@ -1,4 +1,4 @@
-<div class="relative overflow-hidden bg-gradient-to-b from-[#ffd5dc] via-[#ffe4e9] to-white">
+<div class="relative overflow-hidden bg-gradient-to-b from-[#f6a75a] via-[#f6a75a] to-white">
     {{-- Wave Background --}}
     <svg
         class="absolute top-0 left-0 w-full h-[150px] z-10"
@@ -14,11 +14,11 @@
     </svg>
 
     {{-- Content --}}
-    <div class="relative z-20 px-8 pt-[100px] pb-16">
-        <div class="flex justify-between items-center mb-8">
-            <h2 class="text-4xl font-regular ml-12 -translate-y-2.5 text-black">Media</h2>
+    <div class="relative z-20 px-5 md:px-8 pt-[100px] pb-16">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+            <h2 class="text-4xl font-regular md:ml-12 -translate-y-2.5 text-black">Media</h2>
             <a href="{{ route('media.index') }}" 
-               class="bg-orange-300 text-black py-2 px-5 rounded-full">
+               class="bg-[#ffe4e9] text-black py-2 px-5 rounded-full">
                 View All Media
             </a>
         </div>
