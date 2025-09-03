@@ -3,14 +3,14 @@
 
 @section('content')
 <div class="mt-32">
-    <div class="flex justify-start gap-10 pt-20 bg-center pb-10"
+    <div class="flex flex-col md:flex-row justify-start gap-10 pt-0 md:pt-20 bg-center pb-10 md:px-5 lg:px-0"
          style="background-image: url('{{ asset('storage/contact-us/factory.png') }}')">
          
         {{-- Map Section --}}
-        <section class="rounded-r-3xl w-1/2 h-96 bg-top bg-cover relative cursor-pointer"
+        <section class="rounded-r-3xl w-full md:w-1/2 h-96 bg-top bg-cover relative cursor-pointer"
                  onclick="window.open('https://maps.app.goo.gl/We5bDx2zBZVZpbgR6', '_blank')"
                  style="background-image: url('{{ asset('storage/contact-us/map.png') }}')">
-            <div class="absolute bottom-0 left-0 w-full bg-black/60 text-white p-4 rounded-br-2xl">
+            <div class="absolute bottom-0 left-0 w-full bg-black/60 text-white p-4">
                 <h2 class="mb-2">Our Address</h2>
                 <p class="font-light">
                     Gulftek: Head Office - Dammam,<br> Second Industrial City,<br>
@@ -26,31 +26,31 @@
 
         {{-- Buttons Section --}}
         <section class="flex flex-col rounded-3xl w-full items-center">
-            <h1 class="text-5xl font-medium">CONTACT FORMS</h1>
-            <div class="grid grid-cols-2 gap-5 w-full py-10">
+            <h1 class="text-3xl md:text-5xl font-medium">CONTACT FORMS</h1>
+            <div class="grid grid-cols-2 gap-5 w-full py-10 px-5 md:px-0">
                 <button onclick="setActiveForm('form1')" id="btn-form1" class="px-4 py-5 rounded-2xl w-full bg-btn-primary text-white">
-                    <span class="block text-2xl">CUSTOMER</span>
-                    <span class="block text-2xl">REGISTRATION</span>
+                    <span class="block text-lg md:text-2xl">CUSTOMER</span>
+                    <span class="block text-lg md:text-2xl">REGISTRATION</span>
                 </button>
                 <button onclick="setActiveForm('form2')" id="btn-form2" class="px-4 py-5 rounded-2xl w-full bg-btn-primary text-white">
-                    <span class="block text-2xl">SUPPLIER</span>
-                    <span class="block text-2xl">REGISTRATION</span>
+                    <span class="block text-lg md:text-2xl">SUPPLIER</span>
+                    <span class="block text-lg md:text-2xl">REGISTRATION</span>
                 </button>
                 <button onclick="setActiveForm('form3')" id="btn-form3" class="px-4 py-5 rounded-2xl w-full bg-btn-primary text-white">
-                    <span class="text-2xl">SUBMIT A TICKET</span>
+                    <span class="text-lg md:text-2xl">SUBMIT A TICKET</span>
                 </button>
                 <button onclick="setActiveForm('form4')" id="btn-form4" class="px-4 py-5 rounded-2xl w-full bg-btn-primary text-white">
-                    <span class="block text-2xl">FEEDBACK</span>
-                    <span class="block text-2xl">FORM</span>
+                    <span class="block text-lg md:text-2xl">FEEDBACK</span>
+                    <span class="block text-lg md:text-2xl">FORM</span>
                 </button>
             </div>
         </section>
     </div>
 
-    <section class="pt-10">
+    <section class="pt-5 md:pt-10">
         {{-- Customer Registration --}}
         <form id="form1" action="{{ route('customer_list.public_store') }}" onsubmit="submitForm(event)" class="hidden max-w-3xl mx-auto p-6 bg-white rounded-lg space-y-6">
-            <h2 class="text-2xl font-semibold">
+            <h2 class="text-xl md:text-2xl font-semibold">
                 Customer <span class="block">Registration</span>
                 <span class="block w-16 border-b-2 border-orange-300 mt-1"></span>
             </h2>
@@ -126,7 +126,7 @@
 
         {{-- Supplier Registration --}}
         <form id="form2" action="{{ route('vendor_list.public_store') }}" onsubmit="submitForm(event)" class="hidden max-w-3xl mx-auto p-6 bg-white rounded-lg space-y-6">
-            <h2 class="text-2xl font-semibold">
+            <h2 class="text-xl md:text-2xl font-semibold">
                 Supplier <span class="block">Registration</span>
                 <span class="block w-16 border-b-2 border-orange-300 mt-1"></span>
             </h2>
@@ -154,11 +154,11 @@
                 <p class="font-medium">Company Address</p>
                 <input name="addr1" type="text" placeholder="Street Address Lane 1" class="w-full rounded-full bg-gray-200 px-5 py-3" />
                 <input name="addr2" type="text" placeholder="Street Address Lane 2" class="w-full rounded-full bg-gray-200 px-5 py-3" />
-                <div class="flex gap-3">
+                <div class="flex flex-col md:flex-row gap-3">
                     <input name="city" type="text" placeholder="City" class="flex-1 rounded-full bg-gray-200 px-5 py-3" />
                     <input name="email" type="email" placeholder="Email" class="flex-1 rounded-full bg-gray-200 px-5 py-3" />
                 </div>
-                <div class="flex gap-3">
+                <div class="flex flex-col md:flex-row gap-3">
                     <input name="phone" type="tel" placeholder="Tel" class="flex-1 rounded-full bg-gray-200 px-5 py-3" />
                     <input name="country" type="text" placeholder="Country" class="flex-1 rounded-full bg-gray-200 px-5 py-3" />
                 </div>
@@ -183,7 +183,7 @@
 
         {{-- Feedback Form --}}
         <form id="form4" action="{{ route('feedback_list.public_store') }}" onsubmit="submitForm(event)" class="hidden max-w-3xl mx-auto p-6 bg-white rounded-lg space-y-6">
-            <h2 class="text-2xl font-semibold">
+            <h2 class="text-xl md:text-2xl font-semibold">
                 Feedback <span class="block">Form</span>
                 <span class="block w-16 border-b-2 border-orange-300 mt-1"></span>
             </h2>

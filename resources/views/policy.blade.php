@@ -6,16 +6,16 @@
 <div>
     {{-- ======================= HERO MEDIA SECTION ======================= --}}
     <section class="w-full flex justify-center bg-[linear-gradient(to_top_right,#fef7e4,#ffffff,#f6a75a)] mt-20">
-        <div class="w-[75%] h-96 bg-black/50 flex items-center justify-center rounded-2xl py-60 my-10 text-white text-4xl">
+    <div class="w-[85%] md:w-[75%] h-96 bg-black/50 flex items-center justify-center rounded-2xl py-60 my-10 text-white text-4xl">
             Media here
         </div>
     </section>
 
     {{-- ======================= POLICIES CONTENT ======================= --}}
-    <section id="policies" class="flex flex-col gap-40 mt-20 mb-10">
+    <section id="policies" class="flex flex-col gap-20 md:gap-40 mt-20 mb-10">
         @foreach($policies as $index => $policy)
-            <article class="flex justify-around {{ $index % 2 == 0 ? '' : 'flex-row-reverse' }}">
-                <div class="flex flex-col justify-center {{ $index % 2 == 0 ? 'pl-20' : 'pr-20 text-end' }}">
+            <article class="flex justify-around gap-10 md:gap-0 items-center md:items-start {{ $index % 2 == 0 ? 'flex-col md:flex-row' : 'flex-col md:flex-row-reverse' }}">
+                <div class="flex flex-col justify-center {{ $index % 2 == 0 ? 'px-5 md:px-0 md:pl-20' : 'px-5 md:px-0 md:pr-20 md:text-end' }}">
                     <h1 class="text-enjay-head text-3xl font-regular mb-5">{{ $policy->name }}</h1>
                     <div class="text-md font-light">
                         {!! nl2br(e($policy->content)) !!}

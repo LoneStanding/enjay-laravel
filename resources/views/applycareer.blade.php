@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="mt-32"></div>
-<div class="mx-64 bg-white rounded-2xl shadow-lg p-10">
+<div class="lg:mx-64 bg-white rounded-2xl shadow-lg p-10">
     <h1 class="text-3xl font-bold mb-6">Apply for: {{ $career->job_title }}</h1>
 
     <form action="{{ route('apply.submit', $career->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">

@@ -1,5 +1,5 @@
-<div class="grid grid-cols-2 font-light">
-    <div class="grid grid-cols-2 gap-6">
+<div class="grid grid-cols-1 lg:grid-cols-2 font-light justify-items-center lg:justify-items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         @foreach($services as $service)
             <div class="flex items-start space-x-3 group">
                 {{-- Uniform vertical bar --}}

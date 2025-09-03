@@ -8,7 +8,7 @@
   <section class="w-full grid gap-8 px-6 lg:px-12 grid-cols-1 lg:grid-cols-3">
 
     {{-- ================= LEFT STATIC PANEL ================= --}}
-    <aside class="rounded-3xl p-8 lg:p-10 bg-[linear-gradient(180deg,#4c236a,#2e1b56)] text-white relative overflow-hidden">
+    <aside class="rounded-3xl p-8 lg:p-10 bg-[linear-gradient(180deg,#4c236a,#2e1b56)] text-white relative overflow-hidden hidden">
       <h2 class="text-4xl font-semibold mb-8">Services</h2>
 
       <div class="rounded-2xl overflow-hidden border border-white/30 w-full max-w-md">
@@ -21,7 +21,7 @@
       </div>
 
       <a href="{{ url('/brochures') }}"
-         class="mt-10 inline-flex items-center justify-center px-8 py-4 rounded-full text-xl font-semibold
+         class="mt-10 inline-flex items-center justify-center px-8 py-4 rounded-full text-lg md:text-xl font-semibold
                 text-white shadow-lg
                 bg-[linear-gradient(180deg,#86e27a,#1aa64f)] hover:opacity-95 transition">
         Download Brochures

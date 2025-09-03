@@ -4,8 +4,8 @@
 <div>
     <!-- Banner -->
     <section class="w-full mt-20 flex justify-center bg-[linear-gradient(to_top_right,#fef7e4,#ffffff,#f6a75a)]">
-        <div class="w-[75%] h-96 bg-black/50 flex items-center justify-center rounded-2xl py-60 my-10 text-white text-5xl font-extralight">
-            Media
+    <div class="w-[85%] md:w-[75%] h-96 bg-black/50 flex items-center justify-center rounded-2xl py-60 my-10 text-white text-4xl">
+            Media here
         </div>
     </section>
 
@@ -16,7 +16,7 @@
             <span>MEDIA</span>
         </h2>
 
-        <div class="mx-20 grid gap-6 p-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+        <div class="mx-5 md:mx-20 grid gap-6 p-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
             @forelse($newsBlogs as $blog)
                 <a href="{{ route('media.show', $blog->id) }}" class="w-full bg-white rounded-xl shadow-md overflow-hidden group">
                     <div class="relative">

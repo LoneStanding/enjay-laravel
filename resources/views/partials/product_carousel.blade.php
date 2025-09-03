@@ -1,11 +1,11 @@
 <div>
-    <div class="relative mt-20 bg-[linear-gradient(to_top_right,#f6a75a,#ffffff,#f6a75a)] pt-5 pb-40 rounded-3xl">
-        <div class="flex justify-between items-center mb-2.5">
-            <h1 class="text-4xl pl-20">
-                Our Products
-                <span class="block w-80 border-b-2 border-orange-300 mt-2.5"></span>
-            </h1>
-            <p class="font-light text-end pr-36 translate-y-1/6">
+    <div class="relative mt-20 bg-[linear-gradient(to_top_right,#f6a75a,#ffffff,#f6a75a)] pt-5 pb-10 lg:pb-40 rounded-3xl">
+        <div class="flex justify-between mb-2.5 flex-col lg:flex-row pl-6 lg:pl-0">
+<h1 class="text-enjay-primary text-3xl lg:pl-20 lg:mb-10 inline-block w-fit lg:w-auto">
+  Our Products
+  <span class="block lg:w-80 border-b-2 border-orange-300 mt-2.5"></span>
+</h1>
+            <p class="font-light lg:text-end lg:pr-36 translate-y-1/6">
                 We are proud of our customer centric<br />
                 approach and the best in class services to<br />
                 provide innovative solutions to our customers.
@@ -13,7 +13,7 @@
         </div>
 
         <!-- Left/Right Buttons -->
-        <div class="absolute left-2 top-1/2 -translate-y-1/5 z-10 flex flex-col gap-2 justify-center">
+        <div class="absolute left-2 top-1/2 lg:-translate-y-1/5 z-10 flex-col gap-2 justify-center hidden md:flex">
             <button onclick="scrollProducts('left')" class="text-white px-3 py-1 rounded">
                 <img src="{{ asset('storage/images/l_arrow.svg') }}" class="size-12" alt="Left" />
             </button>
@@ -25,7 +25,7 @@
         <!-- Scrollable Product Row -->
         <div
             id="productScroll"
-            class="flex gap-4 overflow-x-auto pl-28 py-4 scrollbar-hide scroll-smooth cursor-pointer translate-y-1/5"
+            class="flex gap-4 overflow-x-auto px-5 lg:px-0 md:pl-28 py-4 scrollbar-hide scroll-smooth cursor-pointer lg:translate-y-1/5"
         >
             @foreach($carouselProducts as $product)
             <a href="{{ url('/products/'.$product->category.'?product='.$product->id) }}">
@@ -61,7 +61,7 @@
     <!-- See All Products Button -->
     <div class="flex justify-center">
         <a href="/products"
-           class="bg-btn-primary rounded-lg px-5 py-2.5 -translate-y-5 text-xl font-light">
+           class="bg-btn-primary rounded-lg px-5 py-2.5 -translate-y-5 text-sm lg:text-xl font-light">
             See All Products
         </a>
     </div>
